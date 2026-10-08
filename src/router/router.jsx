@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../components/Layout";
 import Homepage from "../views/Homepage";
+import { getGames } from "./loaders";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +11,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Homepage />,
+        loader: getGames,
       },
     ],
   },
