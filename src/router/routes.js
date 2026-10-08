@@ -1,9 +1,7 @@
 const routes = {
-
-homepage: "/",
-
-search: "/search/:query",
-
+  homepage: "/",
+  search: "/search/:query",
+  gameDetail: "/game/:id",
 };
 
 export default routes;
