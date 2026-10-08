@@ -37,3 +37,31 @@ export async function getGameDetail({ params }) {
 
   return response.json();
 }
+
+export async function getGenres() {
+  const response = await fetch(
+    `https://api.rawg.io/api/genres?key=${import.meta.env.VITE_RAWG_API_KEY}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Errore nel caricamento dei generi");
+  }
+
+  const data = await response.json();
+
+  return data.results;
+}
+
+export async function getGamesByGenre({ params }) {
+  const response = await fetch(
+    `https://api.rawg.io/api/games?key=${import.meta.env.VITE_RAWG_API_KEY}&genres=${params.genre}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Errore nel caricamento dei giochi per genere");
+  }
+
+  const data = await response.json();
+
+  return data.results;
+}
