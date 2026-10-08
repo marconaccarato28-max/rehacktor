@@ -5,6 +5,8 @@ import Homepage from "../views/Homepage.jsx";
 import SearchPage from "../views/SearchPage.jsx";
 import DetailPage from "../views/DetailPage.jsx";
 import GenrePage from "../views/GenrePage.jsx";
+import RegisterPage from "../views/RegisterPage.jsx";
+import LoginPage from "../views/LoginPage.jsx";
 
 import {
   getGames,
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
         path: "genre/:genre",
         element: <GenrePage />,
         loader: getGamesByGenre,
+      },
+      {
+        path: "register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
       },
     ],
   },
