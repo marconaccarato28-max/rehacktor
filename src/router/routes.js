@@ -1,5 +1,9 @@
 const routes = {
-  homepage: "/",
+
+homepage: "/",
+
+search: "/search/:query",
+
 };
 
 export default routes;
