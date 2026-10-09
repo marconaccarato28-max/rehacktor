@@ -6,6 +6,7 @@ import {
 
 import { supabase } from "../services/supabase.js";
 import { useAuth } from "../context/AuthContext.jsx";
+import ReviewsSection from "../components/ReviewsSection.jsx";
 
 function DetailPage() {
   const game = useLoaderData();
@@ -96,8 +97,7 @@ function DetailPage() {
             {createElement("img", {
               src: game.background_image,
               alt: game.name,
-              className:
-                "h-96 w-full object-cover",
+              className: "h-96 w-full object-cover",
             })}
           </figure>
 
@@ -140,6 +140,8 @@ function DetailPage() {
                   "Descrizione non disponibile",
               }}
             />
+
+            <ReviewsSection gameId={game.id} />
           </div>
         </div>
       </div>
