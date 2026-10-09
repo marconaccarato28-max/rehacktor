@@ -7,6 +7,7 @@ import DetailPage from "../views/DetailPage.jsx";
 import GenrePage from "../views/GenrePage.jsx";
 import RegisterPage from "../views/RegisterPage.jsx";
 import LoginPage from "../views/LoginPage.jsx";
+import ProfilePage from "../views/ProfilePage.jsx";
 
 import {
   getGames,
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <LoginPage />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
       },
     ],
   },

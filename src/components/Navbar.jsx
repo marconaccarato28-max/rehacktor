@@ -6,7 +6,6 @@ import { useAuth } from "../context/AuthContext.jsx";
 function Navbar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-
   const { user, loading } = useAuth();
 
   function handleSubmit(event) {
@@ -80,6 +79,13 @@ function Navbar() {
 
       {!loading && user && (
         <>
+          <Link
+            to="/profile"
+            className="btn btn-ghost"
+          >
+            Profilo
+          </Link>
+
           <span className="hidden lg:inline">
             {user.user_metadata?.username || user.email}
           </span>
