@@ -1,10 +1,24 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "../services/supabase.js";
+import { useAuth } from "../context/AuthContext.jsx";
 
 function Navbar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
+  const { user, loading } = useAuth();
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!query.trim()) {
+      return;
+    }
+
+    navigate(`/search/${query.trim()}`);
+    setQuery("");
+  }
 
   async function handleLogout() {
     const { error } = await supabase.auth.signOut();
@@ -16,17 +30,6 @@ function Navbar() {
 
     alert("Logout effettuato");
     navigate("/login");
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
-
-    if (!query.trim()) {
-      return;
-    }
-
-    navigate(`/search/${query.trim()}`);
-    setQuery("");
   }
 
   return (
@@ -49,26 +52,47 @@ function Navbar() {
           onChange={(event) => setQuery(event.target.value)}
         />
 
-        <button type="submit" className="btn btn-primary">
+        <button
+          type="submit"
+          className="btn btn-primary"
+        >
           Cerca
         </button>
       </form>
 
-      <Link to="/register" className="btn btn-ghost">
-        Registrati
-      </Link>
+      {!loading && !user && (
+        <>
+          <Link
+            to="/register"
+            className="btn btn-ghost"
+          >
+            Registrati
+          </Link>
 
-      <Link to="/login" className="btn btn-ghost">
-        Login
-      </Link>
+          <Link
+            to="/login"
+            className="btn btn-ghost"
+          >
+            Login
+          </Link>
+        </>
+      )}
 
-      <button
-        type="button"
-        className="btn btn-error"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+      {!loading && user && (
+        <>
+          <span className="hidden lg:inline">
+            {user.user_metadata?.username || user.email}
+          </span>
+
+          <button
+            type="button"
+            className="btn btn-error"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </>
+      )}
     </nav>
   );
 }
