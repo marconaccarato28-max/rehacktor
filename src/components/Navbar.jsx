@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import { supabase } from "../services/supabase.js";
 import { useAuth } from "../context/AuthContext.jsx";
 
 function Navbar() {
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
   const { user, loading } = useAuth();
 
   function handleSubmit(event) {
@@ -48,7 +50,9 @@ function Navbar() {
           placeholder="Cerca un gioco..."
           className="input input-bordered"
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) =>
+            setQuery(event.target.value)
+          }
         />
 
         <button
@@ -86,8 +90,16 @@ function Navbar() {
             Profilo
           </Link>
 
+          <Link
+            to="/favorites"
+            className="btn btn-ghost"
+          >
+            Preferiti
+          </Link>
+
           <span className="hidden lg:inline">
-            {user.user_metadata?.username || user.email}
+            {user.user_metadata?.username ||
+              user.email}
           </span>
 
           <button
